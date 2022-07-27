@@ -8,3 +8,7 @@ MVP
 2. Apply some colour changes onto the screenshot
 3. Display the new image 
 4. Be able to close the displayed image
+
+Version 1.0 Result:
+
+![Ver1 Success](showcase/ver1_success.gif)
