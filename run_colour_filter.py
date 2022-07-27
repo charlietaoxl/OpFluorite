@@ -1,7 +1,7 @@
 from os import listdir
 from os.path import isfile, join
 import cv2
-
+import time as pytime
 
 # Global Variables
 SC_FOLDER = '/Users/charlietao/Documents/Screenshots'
@@ -56,6 +56,8 @@ def version_testing(version: int) -> None:
 	
 	# Opening and filtering testing files
 	for file in curr_files:
+
+		# If Ver1 file, show original for 1 second then filtered
 		if file[0:4] == 'Ver' + str(version):
 			print('Testing file found.')
 			path = SC_FOLDER + '/' + file
@@ -77,19 +79,23 @@ def run(time):
 	print('Loop start!')
 	while True:
 		new_files = find_folder(SC_FOLDER)
-		
-		# Checks if directory set is different and locates different file path
-		set_diff = new_files.difference(previous_files)
+
+		# If the sets are different, find different file
+		set_diff = new_files.difference(previous_files)				
 		if set_diff:
 			file_name = set_diff.pop()
+			print(file_name)
+			
+			# If file is a screenshot file, display screenshot
 			if file_name[0] == 'S':
-
-				# Displaying image 
 				new_path = SC_FOLDER + '/' + file_name
 				print(new_path)
-				display_image(new_path, time)
-
+				display_image(new_path, time, True)
+				
 			previous_files = new_files
+
+		# Preventing battery from draining via 1916 runs per second
+		pytime.sleep(0.1)
 
 
 # Console Start
